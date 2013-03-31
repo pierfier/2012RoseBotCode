@@ -9,5 +9,5 @@ package edu.wpi.first.wpilibj.templates;
  * @author Pierre
  */
 public class Rollers {
-    
+
 }
