@@ -30,7 +30,7 @@ public class Turret {
     }
     
     //shooter method but it wont be impressive
-    public void shootSpeed(double speed){
+    public void shoot(double speed){
         
         //safety pwm value
         if(speed > 1.0){
@@ -48,6 +48,7 @@ public class Turret {
     public void noShoot(){
         bottomShooterJag.set(0);
         topShooterJag.set(0);
+        feedJag.set(0);
     }
     public void feedShooter(){
         feedJag.set(.3);

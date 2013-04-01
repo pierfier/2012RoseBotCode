@@ -34,33 +34,15 @@ public class Robot {
         } catch (CANTimeoutException ex) {
             ex.printStackTrace();
         }
-        
+    }
+
+    public void arcadeDrive(double leftSpeed, double rightSpeed) {
+        driveTrain.leftDive(leftSpeed);
+        driveTrain.rightDive(rightSpeed);
     }
     
-    public void arcadeDrive(double leftSpeed, double rightSpeed){
-        
-    }
-    
-    public void collecterOI(){
-        if(controls.operatorLeftBumbper()){
-            rollers.pickUp();
-        }
-        if(!controls.operatorLeftBumbper() || !controls.operatorRightBumbper()){
-            rollers.stop();
-        }
-        if(controls.operatorRightBumbper()){
-            rollers.feed();
-        }
-    }
-    
-    public void shooter(){
+    public void shoot(){
         turret.shoot(shooterSpeed);
-    }
-    
-    public void turretAdjustOI(){
-        
-    }
-    public void cowCatcherOI(){
-        
+        turret.feedShooter();
     }
 }

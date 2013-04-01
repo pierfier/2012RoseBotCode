@@ -77,4 +77,16 @@ public class Controller {
             return false;
         }
     }
+    
+    //operator controller y button state
+    boolean yButton = false;
+    public boolean operatorYButton(){
+        if(operator.getRawButton(4) && yButton == !operator.getRawButton(4)){
+            yButton = true;
+            return true;
+        }else{
+            yButton = false;
+            return false;
+        }
+    }
 }
