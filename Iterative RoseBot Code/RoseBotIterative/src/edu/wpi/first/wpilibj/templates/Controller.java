@@ -17,26 +17,64 @@ public class Controller {
     Joystick driver;
     Joystick operator;
     
-    //operator controller bumper states
-    boolean leftBumperPressed = false;
-    boolean leftBumperCarryOver = false;
-    boolean rightBumperPressed = false;
-    
     public Controller(){
         driver = new Joystick(1);
         operator = new Joystick(2);
     }
-    //TODO populate with get methods for the buttons
+    
+    //operator controller left bumper state
+    boolean leftBumperPressed = false;
+    boolean leftBumperToggle = true;
     public boolean operatorLeftBumbper(){
-        if(operator.getRawButton(5) && !leftBumperPressed){
-            leftBumperPressed = true;
-            leftBumperCarryOver = true;
-        }
-        
-        if(operator.getRawButton(5) && leftBumperPressed && leftBumperCarryOver){
-            leftBumperCarryOver = false;
-            leftBumperPressed = false;
+        if(operator.getRawButton(5) && leftBumperToggle){
+            leftBumperToggle = false;
+            if(leftBumperPressed){
+                leftBumperPressed = false;
+            }else{
+                leftBumperPressed = true;
+            }
+        }else if(!operator.getRawButton(5)){
+            leftBumperToggle = true;
         }
         return leftBumperPressed;
+    }
+    
+    //operator controller right bumper state
+    boolean rightBumperPressed = false;
+    boolean rightBumperToggle = true;
+    public boolean operatorRightBumbper(){
+        if(operator.getRawButton(6) && rightBumperToggle){
+            rightBumperToggle = false;
+            if(rightBumperPressed){
+                rightBumperPressed = false;
+            }else{
+                rightBumperPressed = true;
+            }
+        }else if(!operator.getRawButton(6)){
+            rightBumperToggle = true;
+        }
+        return rightBumperPressed;
+    }
+    //operator controller b button state
+    boolean bButton = false;
+    public boolean operatorBButton(){
+        if(operator.getRawButton(2) && bButton == !operator.getRawButton(2)){
+            bButton = true;
+            return true;
+        }else{
+            bButton = false;
+            return false;
+        }
+    }
+    //operator controller a button state
+    boolean aButton = false;
+    public boolean operatorAButton(){
+        if(operator.getRawButton(1) && aButton == !operator.getRawButton(1)){
+            aButton = true;
+            return true;
+        }else{
+            aButton = false;
+            return false;
+        }
     }
 }

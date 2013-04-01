@@ -12,18 +12,19 @@ import edu.wpi.first.wpilibj.can.CANTimeoutException;
  */
 public class Robot {
     //robot subsystems
-    Controller controls;
+    
     DriveTrain driveTrain;
     Turret turret;
     Rollers rollers;
     CowCatcher cowCatcher;
+    
+    double shooterSpeed = .75;
     
     public Robot(){
         robotInit();
     }
     
     public void robotInit(){
-        controls = new Controller();
         driveTrain = new DriveTrain(1,2,3,4);
         rollers = new Rollers(1);
         cowCatcher = new CowCatcher(1);
@@ -35,18 +36,31 @@ public class Robot {
         }
         
     }
-    public void arcadeDrive(){
-        //left x axis value
-        double leftSpeed = controls.driver.getRawAxis(1);
-        //right x axis value
-        double rightSpeed = controls.driver.getRawAxis(4);
+    
+    public void arcadeDrive(double leftSpeed, double rightSpeed){
+        
     }
-    public void collect(){
+    
+    public void collecterOI(){
         if(controls.operatorLeftBumbper()){
             rollers.pickUp();
         }
-        if(!controls.operatorLeftBumbper()){
+        if(!controls.operatorLeftBumbper() || !controls.operatorRightBumbper()){
             rollers.stop();
         }
+        if(controls.operatorRightBumbper()){
+            rollers.feed();
+        }
+    }
+    
+    public void shooter(){
+        turret.shoot(shooterSpeed);
+    }
+    
+    public void turretAdjustOI(){
+        
+    }
+    public void cowCatcherOI(){
+        
     }
 }
