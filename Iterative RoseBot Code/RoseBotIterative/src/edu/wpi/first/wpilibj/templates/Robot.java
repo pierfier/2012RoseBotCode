@@ -19,7 +19,7 @@ public class Robot {
     CowCatcher cowCatcher;
     
     double shooterSpeed = .75;
-    
+    double yawAngle = 0, pitchAngle = 0;
     public Robot(){
         robotInit();
     }
@@ -44,5 +44,36 @@ public class Robot {
     public void shoot(){
         turret.shoot(shooterSpeed);
         turret.feedShooter();
+    }
+    
+    public void adjustTurnTable(double yAngleIncrement, double pAngleIncrement){
+        yawAngle += yAngleIncrement;
+        pitchAngle += pAngleIncrement;
+        if(yawAngle < -1.0){
+            yawAngle = -1.0;
+        }else
+        if(yawAngle > 1.0){
+            yawAngle = 1.0;
+        }else
+         if(pitchAngle < -1.0){
+            pitchAngle = -1.0;
+        }else
+        if(pitchAngle > 1.0){
+            pitchAngle = 1.0;
+        }
+        try {
+            turret.spinTable(yawAngle);
+            turret.adjustShooter(pitchAngle);
+        } catch (CANTimeoutException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void cowCatcherUp(){
+        cowCatcher.up();
+    }
+    
+    public void cowCatcherDown(){
+        cowCatcher.down();
     }
 }

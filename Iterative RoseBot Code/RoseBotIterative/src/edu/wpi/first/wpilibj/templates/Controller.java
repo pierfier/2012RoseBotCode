@@ -89,4 +89,40 @@ public class Controller {
             return false;
         }
     }
+    
+    //TODO make sure these are correct
+    public double operatorGetYAxis(){
+        if(operator.getY() >= -.1 && operator.getY() <= .1){
+            return 0;
+        }else{
+        return operator.getY();
+        }
+    }
+    
+    //TODO make sure these are correct
+    public double operatorGetRawAxis(){
+        if(operator.getRawAxis(4) >= -.1 && operator.getRawAxis(4) <= .1){
+            return 0;
+        }else{
+        return operator.getRawAxis(4);
+    }
+    }
+    
+    //TODO make sure these are correct
+    public double driverGetYAxis(){
+        if(driver.getY() >= -.1 && driver.getY() <= .1){
+            return 0;
+        }else{
+        return driver.getY();
+        }
+    }
+    
+    //TODO make sure these are correct
+    public double driverGetRawAxis(){
+        if(driver.getRawAxis(4) >= -.1 && driver.getRawAxis(4) <= .1){
+            return 0;
+        }else{
+        return driver.getRawAxis(4);
+    }
+    }
 }

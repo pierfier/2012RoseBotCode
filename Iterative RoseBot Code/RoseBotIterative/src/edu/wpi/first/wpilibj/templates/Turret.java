@@ -54,14 +54,17 @@ public class Turret {
         feedJag.set(.3);
     }
     
-    //adjusts the shooters up and down angle
+    //adjusts the shooters pitch angle
     public void adjustShooter(double angle) throws CANTimeoutException{
-        //angle of adjustement
+        if(stingerAngleJag.getForwardLimitOK() || stingerAngleJag.getReverseLimitOK()){
         stingerAngleJag.setX(angle);
+        }
     }
     //spins the turn table
-    //TODO check if there is a potentiometer for the bot
+    //TODO check if there is a potentiometer or encoder for the bot; figure out the turnTableJag.getForwardLimitOK()
     public void spinTable(double angle) throws CANTimeoutException{
+        if(turnTableJag.getForwardLimitOK() || turnTableJag.getReverseLimitOK()){
         turnTableJag.setX(angle);
+        }
     }
 }

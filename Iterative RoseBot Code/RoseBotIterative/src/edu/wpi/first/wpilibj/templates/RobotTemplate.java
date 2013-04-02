@@ -44,24 +44,26 @@ public class RobotTemplate extends IterativeRobot {
         arcadeDriveOI();
         shooterOI();
         collectorOI();
+        stingerOI();
+        cowCatcherOI();
     }
     
     /**
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-    
+        arcadeDriveOI();
+        shooterOI();
+        collectorOI();
+        stingerOI();
+        cowCatcherOI();
     }
     
     public void arcadeDriveOI(){
-        //left x axis value
-        double leftSpeed = controls.driver.getRawAxis(1);
-        //right x axis value
-        double rightSpeed = controls.driver.getRawAxis(4);
-        
-        robot.arcadeDrive(leftSpeed, rightSpeed);
+        robot.arcadeDrive(controls.driver.getRawAxis(1), controls.driver.getRawAxis(4));
     }
     public void shooterOI(){
+        //only fire when the y button is not pushed, if its do not shoot
         if(controls.operatorYButton()){
             robot.turret.noShoot();
         }else{
@@ -82,6 +84,16 @@ public class RobotTemplate extends IterativeRobot {
         }
         if(controls.operatorRightBumbper()){
             robot.rollers.feed();
+        }
+    }
+    public void stingerOI(){
+        robot.adjustTurnTable(controls.operatorGetRawAxis(), controls.operatorGetYAxis());
+    }
+    public void cowCatcherOI(){
+        if(controls.driverBButton()){
+            robot.cowCatcherUp();
+        }else if(!controls.driverBButton()){
+            robot.cowCatcherDown();
         }
     }
 }
